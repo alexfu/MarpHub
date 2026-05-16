@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: marpyard
+      POSTGRES_DB: marpyard
+    ports:
+      - 5432:5432
