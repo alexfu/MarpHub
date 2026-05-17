@@ -10,6 +10,7 @@ export const actions = {
 		const presentationContent = await presentationFile.text();
 		const presentation = await prisma.presentation.create({
 			data: {
+				title: formData.get('title') as string,
 				content: presentationContent,
 				user: {
 					connectOrCreate: {
