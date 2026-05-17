@@ -11,3 +11,20 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id BigInt @id @default(autoincrement())
+  username String
+  createdAt DateTime
+  updatedAt DateTime
+  presentations Presentation[]
+}
+
+model Presentation {
+  id String @id @default(uuid())
+  userId BigInt
+  user User @relation(fields: [userId], references: [id])
+  content String
+  createdAt DateTime
+  updatedAt DateTime
+}
