@@ -55,7 +55,7 @@ pnpm dev
 The schema lives at `prisma/schema.prisma` and migrations are tracked under `prisma/migrations/`. The generated Prisma client is emitted to `generated/prisma/` — import it from there rather than `@prisma/client`:
 
 ```ts
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from '../../generated/prisma';
 
 const prisma = new PrismaClient();
 ```
