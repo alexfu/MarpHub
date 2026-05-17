@@ -8,5 +8,8 @@
 	});
 </script>
 
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 {@html rendered.html}
+
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 <svelte:head>{@html `<style>${rendered.css}</style>`}</svelte:head>
