@@ -25,7 +25,6 @@ model User {
   accounts      Account[]
 
   @@unique([email])
-  @@map("user")
 }
 
 model Presentation {
