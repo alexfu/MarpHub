@@ -21,7 +21,7 @@
       </button>
       {#if menuOpen}
         <div class="menu" role="menu">
-          <form method="POST" action="/api/auth/sign-out">
+          <form method="POST" action="/sign-out">
             <button type="submit" class="menu-item">Sign out</button>
           </form>
         </div>
