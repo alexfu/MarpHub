@@ -1,6 +1,7 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
   import { formatDistanceToNow } from 'date-fns';
+  import type { Attachment } from 'svelte/attachments';
 
   let { data } = $props();
 
@@ -31,6 +32,13 @@
   ) => {
     return `${presentation.user.name} ⋅ ${formatDate(presentation.createdAt)}`;
   };
+
+  function renderPreview(html: string): Attachment {
+    return (element) => {
+      const shadow = element.attachShadow({ mode: 'open' });
+      shadow.innerHTML = html;
+    };
+  }
 </script>
 
 <div class="container">
@@ -38,9 +46,7 @@
   <div class="grid">
     {#each data.presentations as presentation (presentation.id)}
       <a href={resolve(`/presentations/${presentation.id}`)} class="presentation-card">
-        <div class="thumb">
-          <iframe srcdoc={presentation.previewHtml}></iframe>
-        </div>
+        <div class="preview" {@attach renderPreview(presentation.previewHtml)}></div>
         <div class="footer">
           <div class="title">{presentation.title}</div>
           <div class="meta">{meta(presentation)}</div>
@@ -73,15 +79,9 @@
     padding: 12px;
   }
 
-  .presentation-card .thumb {
+  .presentation-card .preview {
     aspect-ratio: 16/9;
     background: var(--bg-muted);
-  }
-
-  .presentation-card iframe {
-    border: 0px;
-    width: 100%;
-    height: 100%;
   }
 
   .presentation-card .title {
