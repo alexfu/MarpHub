@@ -26,9 +26,7 @@
       userId: string;
       title: string;
       content: string;
-      thumbnailHtml: string | null;
-      thumbnailCss: string | null;
-      slideCount: number;
+      previewHtml: string;
     }
   ) => {
     return `${presentation.user.name} ⋅ ${formatDate(presentation.createdAt)}`;
@@ -40,7 +38,9 @@
   <div class="grid">
     {#each data.presentations as presentation (presentation.id)}
       <a href={resolve(`/presentations/${presentation.id}`)} class="presentation-card">
-        <div class="thumb"></div>
+        <div class="thumb">
+          <iframe srcdoc={presentation.previewHtml}></iframe>
+        </div>
         <div class="footer">
           <div class="title">{presentation.title}</div>
           <div class="meta">{meta(presentation)}</div>
@@ -75,6 +75,12 @@
   .presentation-card .thumb {
     aspect-ratio: 16/9;
     background: var(--bg-muted);
+  }
+
+  .presentation-card iframe {
+    border: 0px;
+    width: 100%;
+    height: 100%;
   }
 
   .presentation-card .title {
