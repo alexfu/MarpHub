@@ -1,5 +1,5 @@
-import { resolve } from '$app/paths';
-import { auth } from '$lib/auth.js';
+import { auth } from '$lib/auth';
+import { parseNextParam } from '$lib/auth/utils.js';
 import { redirect } from '@sveltejs/kit';
 import { APIError } from 'better-auth';
 
@@ -14,7 +14,8 @@ export const actions = {
         },
         headers: request.headers
       });
-      return redirect(303, resolve('/'));
+      const redirectPath = parseNextParam(request) || '/';
+      return redirect(303, redirectPath);
     } catch (error) {
       if (error instanceof APIError) {
         return { error: error.message };
