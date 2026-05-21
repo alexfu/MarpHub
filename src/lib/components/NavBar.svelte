@@ -1,4 +1,6 @@
 <script lang="ts">
+  import ArrowUpTray from '$lib/assets/ArrowUpTray.svelte';
+
   let { session } = $props();
   let menuOpen = $state(false);
 </script>
@@ -9,7 +11,7 @@
   <div class="right">
     {#if session}
       <!-- Logged In -->
-      <a class="btn" href="/upload">+ New</a>
+      <a class="btn" href="/upload"><span class="icon"><ArrowUpTray /></span> Upload</a>
       <button
         type="button"
         class="user-chip"
@@ -104,5 +106,10 @@
 
   .menu-item:hover {
     background: var(--bg-muted);
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
   }
 </style>
