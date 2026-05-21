@@ -20,8 +20,7 @@
         --danger: #f87171;
         --focus: #6b6bff;
 
-        --font-sans:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+        --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
         --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
         --radius: 4px;
@@ -121,7 +120,7 @@
         background: var(--bg);
         border: 1px solid var(--border);
         border-radius: 8px;
-        overflow: hidden;
+        overflow: visible;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       }
 
@@ -520,6 +519,84 @@
         color: var(--text-muted);
         font-family: var(--font-mono);
         letter-spacing: 0.03em;
+        border-radius: 8px 8px 0 0;
+      }
+
+      /* per-element CSS annotations -------------------------------------- */
+      .anno {
+        position: relative;
+      }
+      .anno-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--focus);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        line-height: 1;
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+      .anno-badge.corner {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        margin: 0;
+        z-index: 30;
+        box-shadow: 0 0 0 2px var(--bg);
+      }
+      .anno-badge.inside {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        margin: 0;
+        z-index: 30;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+      }
+      .anno-legend {
+        margin: 12px 0 0;
+        padding: 12px 14px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.9;
+      }
+      .anno-legend ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .anno-legend li {
+        margin: 0;
+      }
+      .anno-legend .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--focus);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      .anno-legend .sel {
+        color: var(--text);
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      .anno-legend .css {
+        color: var(--text-muted);
       }
     </style>
   </head>
@@ -527,10 +604,11 @@
     <header class="proto-header">
       <h1>marpyard — design prototype</h1>
       <p>
-        Static reference for all five screens. Dark theme, plain & utilitarian.
-        Public community for hosting Marp slide decks. Open dev tools to inspect
-        the CSS tokens (defined on <code>:root</code>) and copy the bits you
-        need.
+        Static reference for all five screens. Dark theme, plain & utilitarian. Public community for
+        hosting Marp slide decks. Numbered <span class="anno-badge" style="margin: 0">N</span>
+        badges next to elements map to the legend below each device — showing the CSS for buttons,
+        inputs, cards, and text. Layout/structural rules are omitted; tokens live on
+        <code>:root</code>.
       </p>
       <div class="proto-toc">
         <a href="#feed">/ home feed</a>
@@ -550,41 +628,40 @@
       <div class="frame-label">Route</div>
       <h2 class="frame-title">/ — public feed</h2>
       <p class="frame-note">
-        Grid of recent presentations. The third card here demonstrates the hover
-        state (lifted border to <code>--border-hi</code>). Thumbnails render the
-        deck's first slide via Shadow DOM so per-deck CSS doesn't bleed across
-        cards.
+        Grid of recent presentations. The third card here demonstrates the hover state (lifted
+        border to <code>--border-hi</code>). Thumbnails render the deck's first slide via Shadow DOM
+        so per-deck CSS doesn't bleed across cards.
       </p>
       <div class="device">
         <div class="device-tag">marpyard.app/</div>
 
         <header class="nav">
-          <a class="brand" href="#">marpyard</a>
+          <a class="brand" href="#">marpyard<span class="anno-badge">1</span></a>
           <nav class="nav-right">
-            <a class="btn" href="#">+ New</a>
-            <button class="user-chip" type="button">alex ▾</button>
+            <a class="btn" href="#">+ New<span class="anno-badge">2</span></a>
+            <button class="user-chip" type="button">alex ▾<span class="anno-badge">3</span></button>
           </nav>
         </header>
 
         <div class="page">
           <div class="container">
             <div class="feed-head">
-              <h1 class="page-title">Presentations</h1>
-              <div class="muted">Newest ▾</div>
+              <h1 class="page-title">Presentations<span class="anno-badge">4</span></h1>
+              <div class="muted">Newest ▾<span class="anno-badge">5</span></div>
             </div>
             <ul class="grid">
-              <li>
+              <li class="anno">
                 <a class="card" href="#viewer">
                   <div class="thumb t1">
-                    <div class="thumb-title">
-                      Intro to<br />Distributed Systems
-                    </div>
+                    <div class="thumb-title">Intro to<br />Distributed Systems<span class="anno-badge">8</span></div>
+                    <span class="anno-badge inside">7</span>
                   </div>
                   <div class="card-body">
-                    <div class="card-title">Intro to Distributed Systems</div>
-                    <div class="card-meta">alex · 24 slides · 2d</div>
+                    <div class="card-title">Intro to Distributed Systems<span class="anno-badge">9</span></div>
+                    <div class="card-meta">alex · 24 slides · 2d<span class="anno-badge">10</span></div>
                   </div>
                 </a>
+                <span class="anno-badge corner">6</span>
               </li>
               <li>
                 <a class="card" href="#viewer">
@@ -600,14 +677,10 @@
               <li>
                 <a class="card hovered" href="#viewer">
                   <div class="thumb t3">
-                    <div class="thumb-title">
-                      Postgres<br />performance, the<br />short version
-                    </div>
+                    <div class="thumb-title">Postgres<br />performance, the<br />short version</div>
                   </div>
                   <div class="card-body">
-                    <div class="card-title">
-                      Postgres performance, the short version
-                    </div>
+                    <div class="card-title">Postgres performance, the short version</div>
                     <div class="card-meta">sam · 8 slides · 1w</div>
                   </div>
                 </a>
@@ -615,9 +688,7 @@
               <li>
                 <a class="card" href="#viewer">
                   <div class="thumb t5">
-                    <div class="thumb-title">
-                      Why we rewrote our<br />build system
-                    </div>
+                    <div class="thumb-title">Why we rewrote our<br />build system</div>
                   </div>
                   <div class="card-body">
                     <div class="card-title">Why we rewrote our build system</div>
@@ -653,9 +724,7 @@
                     <div class="thumb-fallback">No preview</div>
                   </div>
                   <div class="card-body">
-                    <div class="card-title">
-                      Legacy deck (no thumbnail yet)
-                    </div>
+                    <div class="card-title">Legacy deck (no thumbnail yet)</div>
                     <div class="card-meta">alex · 0 slides · 1mo</div>
                   </div>
                 </a>
@@ -663,6 +732,20 @@
             </ul>
           </div>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.brand</span><span class="css">— font-weight: 600; color: var(--text); text-decoration: none</span></li>
+          <li><span class="num">2</span><span class="sel">.btn</span><span class="css">— height: 32px; padding: 0 12px; border-radius: 4px; border: 1px solid var(--border); background: transparent; color: var(--text); hover: border-color: var(--border-hi)</span></li>
+          <li><span class="num">3</span><span class="sel">.user-chip</span><span class="css">— padding: 6px 8px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--text); hover: border-color: var(--border)</span></li>
+          <li><span class="num">4</span><span class="sel">.page-title</span><span class="css">— font-size: 22px; font-weight: 600</span></li>
+          <li><span class="num">5</span><span class="sel">.muted</span><span class="css">— color: var(--text-muted)</span></li>
+          <li><span class="num">6</span><span class="sel">.card</span><span class="css">— background: var(--surface); border: 1px solid var(--border); border-radius: 4px; transition: border-color 0.1s; hover: border-color: var(--border-hi)</span></li>
+          <li><span class="num">7</span><span class="sel">.thumb</span><span class="css">— aspect-ratio: 16/9; background: var(--bg-muted); border-bottom: 1px solid var(--border). Variants .t1–.t6 override background/color to mimic each deck's theme.</span></li>
+          <li><span class="num">8</span><span class="sel">.thumb-title</span><span class="css">— font-size: 18px; font-weight: 700; line-height: 1.2</span></li>
+          <li><span class="num">9</span><span class="sel">.card-title</span><span class="css">— font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis</span></li>
+          <li><span class="num">10</span><span class="sel">.card-meta</span><span class="css">— font-size: 13px; color: var(--text-muted)</span></li>
+        </ol>
       </div>
     </section>
 
@@ -679,8 +762,8 @@
         <header class="nav">
           <a class="brand" href="#">marpyard</a>
           <nav class="nav-right">
-            <a href="#">Sign in</a>
-            <a class="btn primary" href="#">Sign up</a>
+            <a href="#">Sign in<span class="anno-badge">1</span></a>
+            <a class="btn primary" href="#">Sign up<span class="anno-badge">2</span></a>
           </nav>
         </header>
 
@@ -691,11 +774,18 @@
               <div class="muted">Newest ▾</div>
             </div>
             <div class="empty">
-              <p class="muted" style="margin: 0">No presentations yet.</p>
-              <a class="btn primary" href="#">New presentation</a>
+              <p class="muted" style="margin: 0">No presentations yet.<span class="anno-badge">3</span></p>
+              <a class="btn primary" href="#">New presentation<span class="anno-badge">2</span></a>
             </div>
           </div>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">nav text link</span><span class="css">— color: inherit; text-decoration: none (plain anchor in nav-right)</span></li>
+          <li><span class="num">2</span><span class="sel">.btn.primary</span><span class="css">— background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600</span></li>
+          <li><span class="num">3</span><span class="sel">.muted</span><span class="css">— color: var(--text-muted)</span></li>
+        </ol>
       </div>
     </section>
 
@@ -706,8 +796,8 @@
       <div class="frame-label">Variation</div>
       <h2 class="frame-title">/ — user menu open</h2>
       <p class="frame-note">
-        How the dropdown looks when expanded. Click-outside-to-close is out of
-        scope for v1; menu also resets on navigation.
+        How the dropdown looks when expanded. Click-outside-to-close is out of scope for v1; menu
+        also resets on navigation.
       </p>
       <div class="device">
         <div class="device-tag">marpyard.app/ (menu open)</div>
@@ -717,10 +807,11 @@
           <nav class="nav-right">
             <a class="btn" href="#">+ New</a>
             <button class="user-chip" type="button" style="border-color: var(--border)">
-              alex ▾
+              alex ▾<span class="anno-badge">1</span>
             </button>
-            <div class="menu" role="menu">
-              <button class="menu-item">Sign out</button>
+            <div class="menu anno" role="menu">
+              <button class="menu-item">Sign out<span class="anno-badge">3</span></button>
+              <span class="anno-badge corner">2</span>
             </div>
           </nav>
         </header>
@@ -731,6 +822,13 @@
           </div>
         </div>
       </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.user-chip (open)</span><span class="css">— border-color: var(--border) — same hover-state border as on focus/active</span></li>
+          <li><span class="num">2</span><span class="sel">.menu</span><span class="css">— position: absolute (top: calc(100% + 4px); right: 0); background: var(--surface); border: 1px solid var(--border); border-radius: 4px; min-width: 140px; font-size: 14px</span></li>
+          <li><span class="num">3</span><span class="sel">.menu-item</span><span class="css">— background: transparent; color: var(--text); border: 0; padding: 8px 12px; text-align: left; hover: background: var(--bg-muted)</span></li>
+        </ol>
+      </div>
     </section>
 
     <!-- ============================================================
@@ -740,9 +838,9 @@
       <div class="frame-label">Route</div>
       <h2 class="frame-title">/upload — new presentation</h2>
       <p class="frame-note">
-        Auth-required. On submit, the server renders the deck once, extracts the
-        first slide + theme CSS, persists the row, redirects to the new deck.
-        Logged-out visitors get redirected to <code>/sign-in?next=/upload</code>.
+        Auth-required. On submit, the server renders the deck once, extracts the first slide + theme
+        CSS, persists the row, redirects to the new deck. Logged-out visitors get redirected to
+        <code>/sign-in?next=/upload</code>.
       </p>
       <div class="device">
         <div class="device-tag">marpyard.app/upload</div>
@@ -757,33 +855,46 @@
 
         <div class="page">
           <div class="form-container">
-            <h1 class="page-title" style="margin-bottom: 24px">New presentation</h1>
+            <h1 class="page-title" style="margin-bottom: 24px">New presentation<span class="anno-badge">1</span></h1>
 
-            <form class="stack" onsubmit="return false">
+            <form class="stack" onsubmit="return false;">
               <label>
-                <span class="label">Title</span>
-                <input class="input" type="text" placeholder="My deck" />
+                <span class="label">Title<span class="anno-badge">2</span></span>
+                <span class="anno" style="display:block">
+                  <input class="input" type="text" placeholder="My deck" />
+                  <span class="anno-badge inside">3</span>
+                </span>
               </label>
               <label>
                 <span class="label">Markdown file</span>
-                <input class="input" type="file" />
+                <span class="anno" style="display:block">
+                  <input class="input" type="file" />
+                  <span class="anno-badge inside">4</span>
+                </span>
               </label>
               <details>
-                <summary>What's Marp?</summary>
+                <summary>What's Marp?<span class="anno-badge">5</span></summary>
                 <p class="muted" style="margin: 8px 0 0; font-size: 13px">
                   Marp is markdown for slides. See
-                  <a href="https://marp.app" target="_blank" rel="noreferrer"
-                    >marp.app</a
-                  >.
+                  <a href="https://marp.app" target="_blank" rel="noreferrer">marp.app</a>.
                 </p>
               </details>
-              <button class="btn primary full" type="submit">
-                Create presentation
-              </button>
-              <a class="center-link" href="#">Cancel</a>
+              <button class="btn primary full" type="submit">Create presentation<span class="anno-badge">6</span></button>
+              <a class="center-link" href="#">Cancel<span class="anno-badge">7</span></a>
             </form>
           </div>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.page-title</span><span class="css">— font-size: 22px; font-weight: 600</span></li>
+          <li><span class="num">2</span><span class="sel">.label</span><span class="css">— font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted)</span></li>
+          <li><span class="num">3</span><span class="sel">.input (text)</span><span class="css">— background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; width: 100%; placeholder color: var(--text-muted); focus: border-color: var(--focus); box-shadow: 0 0 0 1px var(--focus)</span></li>
+          <li><span class="num">4</span><span class="sel">.input (file)</span><span class="css">— same as text input; native file-picker UI styled by browser inside the field</span></li>
+          <li><span class="num">5</span><span class="sel">details &gt; summary</span><span class="css">— cursor: pointer; color: var(--text-muted); font-size: 13px</span></li>
+          <li><span class="num">6</span><span class="sel">.btn.primary.full</span><span class="css">— background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; width: 100%; height: 32px; border-radius: 4px</span></li>
+          <li><span class="num">7</span><span class="sel">.center-link</span><span class="css">— display: block; text-align: center; color: var(--text-muted); text-decoration: none; font-size: 13px</span></li>
+        </ol>
       </div>
     </section>
 
@@ -794,17 +905,14 @@
       <div class="frame-label">Route</div>
       <h2 class="frame-title">/presentations/[id] — deck viewer</h2>
       <p class="frame-note">
-        One slide at a time. Arrows + ← → / Space / j / k for navigation. Hash
-        in the URL reflects current slide (<code>#7</code>). <code>f</code>
-        toggles fullscreen on the stage. The Marp render shown below is a mock —
-        in the real app it's the deck's first slide rendered with the author's
-        theme on top of the dark page chrome. <code>Delete</code> only appears
-        when the viewer is the deck's owner.
+        One slide at a time. Arrows + ← → / Space / j / k for navigation. Hash in the URL reflects
+        current slide (<code>#7</code>). <code>f</code> toggles fullscreen on the stage. The Marp
+        render shown below is a mock — in the real app it's the deck's first slide rendered with the
+        author's theme on top of the dark page chrome. <code>Delete</code> only appears when the
+        viewer is the deck's owner.
       </p>
       <div class="device">
-        <div class="device-tag">
-          marpyard.app/presentations/0f3b9d6c-…
-        </div>
+        <div class="device-tag">marpyard.app/presentations/0f3b9d6c-…</div>
 
         <header class="nav">
           <a class="brand" href="#">marpyard</a>
@@ -814,35 +922,51 @@
           </nav>
         </header>
 
-        <div class="meta-bar">
+        <div class="meta-bar anno">
           <div>
-            <span class="title">Intro to Distributed Systems</span>
+            <span class="title">Intro to Distributed Systems<span class="anno-badge">2</span></span>
             <span class="muted"> · alex · 24 slides · 2d</span>
           </div>
           <div class="meta-actions">
-            <a class="btn" href="#">↓ .md</a>
-            <button class="btn danger" type="button">Delete</button>
+            <a class="btn" href="#">↓ .md<span class="anno-badge">3</span></a>
+            <button class="btn danger" type="button">Delete<span class="anno-badge">4</span></button>
           </div>
+          <span class="anno-badge corner">1</span>
         </div>
 
         <div class="stage-wrap">
-          <div class="stage">
-            <h2>Consistency, Availability, Partition tolerance</h2>
-            <p>Pick two. (You already know which two.)</p>
+          <div class="stage anno">
+            <h2>Consistency, Availability, Partition tolerance<span class="anno-badge">6</span></h2>
+            <p>Pick two. (You already know which two.)<span class="anno-badge">7</span></p>
             <ul>
-              <li>CP — every read sees the latest write or fails</li>
+              <li>CP — every read sees the latest write or fails<span class="anno-badge">8</span></li>
               <li>AP — every read returns something, possibly stale</li>
               <li>CA — only in a single-node fantasy world</li>
             </ul>
+            <span class="anno-badge corner">5</span>
           </div>
         </div>
 
         <div class="stage-footer">
-          <button class="arrow" type="button" aria-label="Previous">‹</button>
+          <button class="arrow" type="button" aria-label="Previous">‹<span class="anno-badge">9</span></button>
           <span>7 / 24</span>
           <button class="arrow" type="button" aria-label="Next">›</button>
-          <span class="hint">· ← → to navigate · f for fullscreen</span>
+          <span class="hint">· ← → to navigate · f for fullscreen<span class="anno-badge">10</span></span>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.meta-bar</span><span class="css">— background: var(--bg-muted); border-bottom: 1px solid var(--border); padding: 10px 16px; font-size: 14px</span></li>
+          <li><span class="num">2</span><span class="sel">.meta-bar .title</span><span class="css">— font-weight: 600 (the surrounding muted span uses color: var(--text-muted))</span></li>
+          <li><span class="num">3</span><span class="sel">.btn</span><span class="css">— height: 32px; padding: 0 12px; border: 1px solid var(--border); border-radius: 4px; background: transparent; color: var(--text)</span></li>
+          <li><span class="num">4</span><span class="sel">.btn.danger</span><span class="css">— color: var(--danger); border: 1px solid var(--border); background: transparent</span></li>
+          <li><span class="num">5</span><span class="sel">.stage</span><span class="css">— width: 100%; max-width: 760px; aspect-ratio: 16/9; background: var(--surface); border: 1px solid var(--border-hi); border-radius: 4px; padding: 48px 64px</span></li>
+          <li><span class="num">6</span><span class="sel">.stage h2</span><span class="css">— font-size: 36px; font-weight: 700; margin: 0 0 16px</span></li>
+          <li><span class="num">7</span><span class="sel">.stage p</span><span class="css">— font-size: 18px; color: var(--text-muted); margin: 0 0 12px; max-width: 50ch</span></li>
+          <li><span class="num">8</span><span class="sel">.stage ul</span><span class="css">— font-size: 17px; line-height: 1.7; padding-left: 20px</span></li>
+          <li><span class="num">9</span><span class="sel">.arrow</span><span class="css">— width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; background: transparent; font-size: 16px; hover: border-color: var(--border-hi). Variant .arrow.disabled: opacity: 0.4; color: var(--text-muted)</span></li>
+          <li><span class="num">10</span><span class="sel">.hint</span><span class="css">— font-size: 12px; color: var(--text-muted) (inherits from stage-footer)</span></li>
+        </ol>
       </div>
     </section>
 
@@ -854,10 +978,9 @@
       <h2 class="frame-title">/sign-in</h2>
       <p class="frame-note">
         Email + password. Validation errors show in
-        <code>--danger</code> above the form. <code>?next=</code> on the URL is
-        honored on success, but only when same-origin (validate before
-        redirecting). The password field is shown focused here to demonstrate the
-        <code>--focus</code> ring.
+        <code>--danger</code> above the form. <code>?next=</code> on the URL is honored on success,
+        but only when same-origin (validate before redirecting). The password field is shown focused
+        here to demonstrate the <code>--focus</code> ring.
       </p>
       <div class="device">
         <div class="device-tag">marpyard.app/sign-in</div>
@@ -872,26 +995,45 @@
 
         <div class="page">
           <div class="auth-card">
-            <div class="card-box">
-              <h2>Sign in</h2>
+            <div class="card-box anno">
+              <h2>Sign in<span class="anno-badge">2</span></h2>
               <p class="error" style="margin: 0 0 12px; font-size: 13px">
-                Invalid email or password.
+                Invalid email or password.<span class="anno-badge">3</span>
               </p>
-              <form class="stack" onsubmit="return false">
+              <form class="stack" onsubmit="return false;">
                 <label>
-                  <span class="label">Email</span>
-                  <input class="input" type="email" value="alex@example.com" />
+                  <span class="label">Email<span class="anno-badge">4</span></span>
+                  <span class="anno" style="display:block">
+                    <input class="input" type="email" value="alex@example.com" />
+                    <span class="anno-badge inside">5</span>
+                  </span>
                 </label>
                 <label>
                   <span class="label">Password</span>
-                  <input class="input focused" type="password" value="••••••••" />
+                  <span class="anno" style="display:block">
+                    <input class="input focused" type="password" value="••••••••" />
+                    <span class="anno-badge inside">6</span>
+                  </span>
                 </label>
-                <button class="btn primary full" type="submit">Sign in</button>
+                <button class="btn primary full" type="submit">Sign in<span class="anno-badge">7</span></button>
               </form>
-              <p class="card-footer">No account? <a href="#sign-up">Sign up</a></p>
+              <p class="card-footer">No account? <a href="#sign-up">Sign up</a><span class="anno-badge">8</span></p>
+              <span class="anno-badge corner">1</span>
             </div>
           </div>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.card-box</span><span class="css">— background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 24px; max-width: 360px</span></li>
+          <li><span class="num">2</span><span class="sel">.card-box h2</span><span class="css">— font-size: 18px; font-weight: 600; margin: 0 0 16px</span></li>
+          <li><span class="num">3</span><span class="sel">.error</span><span class="css">— color: var(--danger); font-size: 13px (overridden inline here)</span></li>
+          <li><span class="num">4</span><span class="sel">.label</span><span class="css">— font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted)</span></li>
+          <li><span class="num">5</span><span class="sel">.input</span><span class="css">— background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; width: 100%</span></li>
+          <li><span class="num">6</span><span class="sel">.input :focus / .input.focused</span><span class="css">— border-color: var(--focus); box-shadow: 0 0 0 1px var(--focus); outline: none</span></li>
+          <li><span class="num">7</span><span class="sel">.btn.primary.full</span><span class="css">— background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; width: 100%; height: 32px; border-radius: 4px</span></li>
+          <li><span class="num">8</span><span class="sel">.card-footer</span><span class="css">— text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); inner &lt;a&gt; uses color: var(--text)</span></li>
+        </ol>
       </div>
     </section>
 
@@ -902,8 +1044,8 @@
       <div class="frame-label">Route</div>
       <h2 class="frame-title">/sign-up</h2>
       <p class="frame-note">
-        Name + email + password. Same card frame as sign-in. After successful
-        sign-up the user is auto-signed-in (call <code>signInEmail</code>
+        Name + email + password. Same card frame as sign-in. After successful sign-up the user is
+        auto-signed-in (call <code>signInEmail</code>
         explicitly if better-auth doesn't set a session cookie on
         <code>signUpEmail</code> by default in your version). Then redirect to
         <code>?next=</code> if same-origin, else <code>/</code>.
@@ -921,12 +1063,15 @@
 
         <div class="page">
           <div class="auth-card">
-            <div class="card-box">
-              <h2>Sign up</h2>
-              <form class="stack" onsubmit="return false">
+            <div class="card-box anno">
+              <h2>Sign up<span class="anno-badge">2</span></h2>
+              <form class="stack" onsubmit="return false;">
                 <label>
-                  <span class="label">Name</span>
-                  <input class="input" type="text" placeholder="Alex" />
+                  <span class="label">Name<span class="anno-badge">3</span></span>
+                  <span class="anno" style="display:block">
+                    <input class="input" type="text" placeholder="Alex" />
+                    <span class="anno-badge inside">4</span>
+                  </span>
                 </label>
                 <label>
                   <span class="label">Email</span>
@@ -936,16 +1081,23 @@
                   <span class="label">Password</span>
                   <input class="input" type="password" />
                 </label>
-                <button class="btn primary full" type="submit">
-                  Create account
-                </button>
+                <button class="btn primary full" type="submit">Create account<span class="anno-badge">5</span></button>
               </form>
-              <p class="card-footer">
-                Already have an account? <a href="#sign-in">Sign in</a>
-              </p>
+              <p class="card-footer">Already have an account? <a href="#sign-in">Sign in</a><span class="anno-badge">6</span></p>
+              <span class="anno-badge corner">1</span>
             </div>
           </div>
         </div>
+      </div>
+      <div class="anno-legend">
+        <ol>
+          <li><span class="num">1</span><span class="sel">.card-box</span><span class="css">— background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 24px; max-width: 360px</span></li>
+          <li><span class="num">2</span><span class="sel">.card-box h2</span><span class="css">— font-size: 18px; font-weight: 600; margin: 0 0 16px</span></li>
+          <li><span class="num">3</span><span class="sel">.label</span><span class="css">— font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted)</span></li>
+          <li><span class="num">4</span><span class="sel">.input</span><span class="css">— background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; width: 100%; placeholder color: var(--text-muted)</span></li>
+          <li><span class="num">5</span><span class="sel">.btn.primary.full</span><span class="css">— background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; width: 100%; height: 32px; border-radius: 4px</span></li>
+          <li><span class="num">6</span><span class="sel">.card-footer</span><span class="css">— text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); inner &lt;a&gt; uses color: var(--text)</span></li>
+        </ol>
       </div>
     </section>
 
