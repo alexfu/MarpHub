@@ -1,3 +1,5 @@
+@import './forms.css';
+
 :root {
   color-scheme: dark;
 
@@ -58,39 +60,6 @@ a {
 button {
   font: inherit;
   cursor: pointer;
-}
-
-input,
-button,
-select,
-textarea {
-  font-family: inherit;
-}
-
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='file'] {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 8px 10px;
-  width: 100%;
-}
-
-input::placeholder {
-  color: var(--text-muted);
-}
-
-input[type='text']:focus,
-input[type='email']:focus,
-input[type='password']:focus,
-input[type='file']:focus,
-button:focus-visible {
-  outline: none;
-  border-color: var(--focus);
-  box-shadow: 0 0 0 1px var(--focus);
 }
 
 .btn {

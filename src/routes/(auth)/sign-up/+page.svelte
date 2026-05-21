@@ -4,15 +4,15 @@
 
 <h2>Sign up</h2>
 <form method="POST">
-  <div>
+  <div class="input-container">
     <label for="name">Name</label>
     <input name="name" type="text" required />
   </div>
-  <div>
+  <div class="input-container">
     <label for="email">Email</label>
     <input name="email" type="email" required />
   </div>
-  <div>
+  <div class="input-container">
     <label for="password">Password</label>
     <input name="password" type="password" required />
   </div>
@@ -25,13 +25,6 @@
     font-size: 18px;
     font-weight: 600;
     margin: 0 0 16px;
-  }
-
-  label {
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-muted);
   }
 
   .footer {

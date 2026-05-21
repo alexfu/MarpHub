@@ -9,11 +9,11 @@
   <p class="error">{form.error}</p>
 {/if}
 <form method="POST">
-  <div>
+  <div class="input-container">
     <label for="email">Email</label>
     <input name="email" type="text" required />
   </div>
-  <div>
+  <div class="input-container">
     <label for="password">Password</label>
     <input name="password" type="password" required />
   </div>
@@ -31,13 +31,6 @@
   .error {
     color: var(--danger);
     font-size: 13px;
-  }
-
-  label {
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-muted);
   }
 
   .footer {
