@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/auth';
 
 export const load: PageServerLoad = async () => {
-  const presentations = await prisma.presentation.findMany();
+  const presentations = await prisma.presentation.findMany({ include: { user: true } });
   return { presentations };
 };
 
