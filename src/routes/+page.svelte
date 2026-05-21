@@ -43,17 +43,26 @@
 
 <div class="container">
   <h1 class="page-title">Presentations</h1>
-  <div class="grid">
-    {#each data.presentations as presentation (presentation.id)}
-      <a href={resolve(`/presentations/${presentation.id}`)} class="presentation-card">
-        <div class="preview" {@attach renderPreview(presentation.previewHtml)}></div>
-        <div class="footer">
-          <div class="title">{presentation.title}</div>
-          <div class="meta">{meta(presentation)}</div>
-        </div>
-      </a>
-    {/each}
-  </div>
+  {#if data.presentations.length == 0}
+    <div class="container-sm">
+      <div id="empty-view">
+        <div class="text">No presentations yet.</div>
+        <a href="/upload" class="btn primary">Upload</a>
+      </div>
+    </div>
+  {:else}
+    <div class="grid">
+      {#each data.presentations as presentation (presentation.id)}
+        <a href={resolve(`/presentations/${presentation.id}`)} class="presentation-card">
+          <div class="preview" {@attach renderPreview(presentation.previewHtml)}></div>
+          <div class="footer">
+            <div class="title">{presentation.title}</div>
+            <div class="meta">{meta(presentation)}</div>
+          </div>
+        </a>
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -93,6 +102,17 @@
 
   .presentation-card .meta {
     font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  #empty-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #empty-view .text {
+    text-align: center;
     color: var(--text-muted);
   }
 </style>
