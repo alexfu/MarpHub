@@ -3,6 +3,7 @@
   import type { PageProps } from './$types';
   import { goto } from '$app/navigation';
   import { formatDistanceToNow } from 'date-fns';
+  import { resolve } from '$app/paths';
 
   let { data }: PageProps = $props();
   let rendered = $derived.by(() => {
@@ -29,7 +30,10 @@
 <div class="meta-bar">
   <div class="info">
     <span class="title">{data.presentation.title}</span>
-    <span>{data.presentation.user.name}</span>
+    <span
+      ><a href={resolve(`/users/${data.presentation.user.id}`)}>{data.presentation.user.name}</a
+      ></span
+    >
     <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
   </div>
 

@@ -5,12 +5,11 @@
 </script>
 
 <div class="container">
-  <h1 class="page-title">Presentations</h1>
+  <h1 class="page-title">{data.user.name}s presentations</h1>
   {#if data.presentations.length == 0}
     <div class="container-sm">
       <div id="empty-view">
         <div class="text">No presentations yet.</div>
-        <a href="/upload" class="btn primary">Upload</a>
       </div>
     </div>
   {:else}

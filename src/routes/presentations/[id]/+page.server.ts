@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers });
   const presentation = await prisma.presentation.findFirst({
     where: { id: params.id },
-    include: { user: { select: { name: true } } }
+    include: { user: { select: { id: true, name: true } } }
   });
   if (!presentation) {
     return error(404, 'Not found');
