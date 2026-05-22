@@ -2,6 +2,7 @@
   import { Marp } from '@marp-team/marp-core';
   import type { PageProps } from './$types';
   import { goto } from '$app/navigation';
+  import { formatDistanceToNow } from 'date-fns';
 
   let { data }: PageProps = $props();
   let rendered = $derived.by(() => {
@@ -26,9 +27,11 @@
 </dialog>
 
 <div class="meta-bar">
-  <span class="title">
-    {data.presentation.title}
-  </span>
+  <div class="info">
+    <span class="title">{data.presentation.title}</span>
+    <span>{data.presentation.user.name}</span>
+    <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
+  </div>
 
   {#if data.isOwner}
     <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
@@ -53,7 +56,20 @@
   }
 
   .meta-bar .title {
+    color: var(--text);
     font-weight: 600;
+  }
+
+  .meta-bar .info {
+    display: flex;
+    color: var(--text-muted);
     flex-grow: 1;
+  }
+
+  .meta-bar .info > *:not(:last-child)::after {
+    font-weight: 400;
+    color: var(--text-muted);
+    content: '⋅';
+    padding: 0 5px;
   }
 </style>

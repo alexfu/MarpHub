@@ -5,7 +5,10 @@ import { auth } from '$lib/auth';
 
 export const load: PageServerLoad = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers });
-  const presentation = await prisma.presentation.findFirst({ where: { id: params.id } });
+  const presentation = await prisma.presentation.findFirst({
+    where: { id: params.id },
+    include: { user: { select: { name: true } } }
+  });
   if (!presentation) {
     return error(404, 'Not found');
   }
