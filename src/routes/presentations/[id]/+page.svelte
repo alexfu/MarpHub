@@ -7,12 +7,23 @@
   let rendered = $derived.by(() => {
     return new Marp().render(data.presentation.content);
   });
+  let dialog: HTMLDialogElement;
 
   const deletePresentation = async () => {
+    dialog.close();
     await fetch(`/presentations/${data.presentation.id}`, { method: 'DELETE' });
     goto('/');
   };
 </script>
+
+<dialog id="confirm-delete" bind:this={dialog}>
+  <p class="title">Confirm delete</p>
+  <p class="body">Are you sure you want to delete this presentation?</p>
+  <div class="footer">
+    <button class="btn" command="close" commandfor="confirm-delete">Cancel</button>
+    <button class="btn danger" onclick={deletePresentation}>Delete</button>
+  </div>
+</dialog>
 
 <div class="meta-bar">
   <span class="title">
@@ -20,7 +31,7 @@
   </span>
 
   {#if data.isOwner}
-    <button class="btn danger" onclick={deletePresentation}>Delete</button>
+    <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
   {/if}
 </div>
 
