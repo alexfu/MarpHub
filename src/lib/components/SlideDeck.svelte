@@ -1,4 +1,7 @@
 <script lang="ts">
+  import ChevronLeft from '$lib/assets/ChevronLeft.svelte';
+  import ChevronRight from '$lib/assets/ChevronRight.svelte';
+  import Expand from '$lib/assets/Expand.svelte';
   import { Marp } from '@marp-team/marp-core';
   import { onMount } from 'svelte';
 
@@ -25,23 +28,35 @@
 
   function onKeyDown(e: KeyboardEvent) {
     if (keybinds.next.includes(e.key)) {
-      const slides = container.getElementsByTagName('svg');
-      if (currentPage < slides.length - 1) {
-        e.preventDefault();
-        forward(slides);
-      }
+      nextSlide(e);
     }
 
     if (keybinds.previous.includes(e.key)) {
-      const slides = container.getElementsByTagName('svg');
-      if (currentPage > 0) {
-        e.preventDefault();
-        backward(slides);
-      }
+      prevSlide(e);
     }
 
     if (keybinds.fullscreen.includes(e.key)) {
       container.requestFullscreen();
+    }
+  }
+
+  function enterFullscreen() {
+    container.requestFullscreen();
+  }
+
+  function nextSlide(e: Event) {
+    const slides = container.getElementsByTagName('svg');
+    if (currentPage < slides.length - 1) {
+      e.preventDefault();
+      forward(slides);
+    }
+  }
+
+  function prevSlide(e: Event) {
+    const slides = container.getElementsByTagName('svg');
+    if (currentPage > 0) {
+      e.preventDefault();
+      backward(slides);
     }
   }
 
@@ -85,6 +100,11 @@
 <div class="container" bind:this={container}>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html rendered.html}
+  <div class="controls">
+    <button onclick={prevSlide}><ChevronLeft /> </button>
+    <button onclick={nextSlide}><ChevronRight /></button>
+    <button onclick={enterFullscreen}><Expand /></button>
+  </div>
 </div>
 
 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -132,5 +152,27 @@
 
   :global(.marpit svg.right) {
     left: 140%;
+  }
+
+  .controls {
+    display: flex;
+    gap: 16px;
+    background: var(--surface);
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    transform: translate(-50%);
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  .controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    width: 48px;
+    height: 48px;
   }
 </style>
