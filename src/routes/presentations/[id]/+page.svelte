@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { Marp } from '@marp-team/marp-core';
   import type { PageProps } from './$types';
   import { goto } from '$app/navigation';
   import { formatDistanceToNow } from 'date-fns';
   import { resolve } from '$app/paths';
+  import SlideDeck from '$lib/components/SlideDeck.svelte';
 
   let { data }: PageProps = $props();
-  let rendered = $derived.by(() => {
-    return new Marp().render(data.presentation.content);
-  });
+
   let dialog: HTMLDialogElement;
 
   const deletePresentation = async () => {
@@ -27,32 +25,50 @@
   </div>
 </dialog>
 
-<div class="meta-bar">
-  <div class="bar-inner">
-    <div class="info">
-      <span class="title">{data.presentation.title}</span>
-      <span
-        ><a href={resolve(`/users/${data.presentation.user.id}`)}>{data.presentation.user.name}</a
-        ></span
-      >
-      <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
+<div id="presentation-content">
+  <div class="meta-bar">
+    <div class="bar-inner">
+      <div class="info">
+        <span class="title">{data.presentation.title}</span>
+        <span
+          ><a href={resolve(`/users/${data.presentation.user.id}`)}>{data.presentation.user.name}</a
+          ></span
+        >
+        <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
+      </div>
+
+      {#if data.isOwner}
+        <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
+      {/if}
     </div>
-
-    {#if data.isOwner}
-      <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
-    {/if}
   </div>
+  <SlideDeck presentation={data.presentation} />
 </div>
-
-<div class="container">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-  {@html rendered.html}
-</div>
-
-<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-<svelte:head>{@html `<style>${rendered.css}</style>`}</svelte:head>
 
 <style>
+  :global(.marpit),
+  :global(.marpit svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.marpit) {
+    position: relative;
+    overflow: hidden;
+  }
+
+  :global(.marpit svg) {
+    position: absolute;
+    top: 0;
+  }
+
+  #presentation-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
   .meta-bar {
     background: var(--bg-muted);
     border-bottom: 1px solid var(--border);
