@@ -12,7 +12,10 @@
     <div class="right">
       {#if session}
         <!-- Logged In -->
-        <a class="btn" href="/upload"><span class="icon"><ArrowUpTray /></span> Upload</a>
+        <a class="btn" href="/upload">
+          <span class="icon"><ArrowUpTray /></span>
+          <span class="btn-label">Upload</span>
+        </a>
         <button
           type="button"
           class="user-chip"
@@ -71,6 +74,10 @@
     border-radius: var(--radius);
     font: inherit;
     cursor: pointer;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .user-chip:hover {
@@ -110,5 +117,14 @@
   .icon {
     width: 16px;
     height: 16px;
+  }
+
+  @media (max-width: 479px) {
+    .btn-label {
+      display: none;
+    }
+    .user-chip {
+      max-width: 100px;
+    }
   }
 </style>
