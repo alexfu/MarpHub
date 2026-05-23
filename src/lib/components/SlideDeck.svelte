@@ -16,6 +16,10 @@
       if (i == currentPage) {
         slides[i].classList.toggle('active');
       }
+
+      if (i > currentPage) {
+        slides[i].classList.toggle('right');
+      }
     }
   });
 
@@ -23,25 +27,57 @@
     if (keybinds.next.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage < slides.length - 1) {
-        slides[currentPage].classList.toggle('active');
-        currentPage += 1;
-        slides[currentPage].classList.toggle('active');
         e.preventDefault();
+        forward(slides);
       }
     }
 
     if (keybinds.previous.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage > 0) {
-        slides[currentPage].classList.toggle('active');
-        currentPage -= 1;
-        slides[currentPage].classList.toggle('active');
         e.preventDefault();
+        backward(slides);
       }
     }
 
     if (keybinds.fullscreen.includes(e.key)) {
       container.requestFullscreen();
+    }
+  }
+
+  function forward(slides: HTMLCollectionOf<SVGSVGElement>) {
+    moveLeft(slides[currentPage]);
+    currentPage += 1;
+    moveLeft(slides[currentPage]);
+  }
+
+  function backward(slides: HTMLCollectionOf<SVGSVGElement>) {
+    moveRight(slides[currentPage]);
+    currentPage -= 1;
+    moveRight(slides[currentPage]);
+  }
+
+  function moveLeft(slide: SVGSVGElement) {
+    if (slide.classList.contains('active')) {
+      slide.classList.remove('active');
+      slide.classList.add('left');
+    }
+
+    if (slide.classList.contains('right')) {
+      slide.classList.remove('right');
+      slide.classList.add('active');
+    }
+  }
+
+  function moveRight(slide: SVGSVGElement) {
+    if (slide.classList.contains('active')) {
+      slide.classList.remove('active');
+      slide.classList.add('right');
+    }
+
+    if (slide.classList.contains('left')) {
+      slide.classList.remove('left');
+      slide.classList.add('active');
     }
   }
 </script>
@@ -62,24 +98,39 @@
     flex: 1;
   }
 
-  :global(.marpit),
-  :global(.marpit svg) {
+  :global(.marpit) {
+    position: relative;
+    overflow: hidden;
     width: 100%;
     height: 100%;
   }
 
-  :global(.marpit) {
-    position: relative;
-    overflow: hidden;
-  }
-
   :global(.marpit svg) {
     position: absolute;
-    top: 0;
-    content-visibility: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 80%;
+    height: 80%;
+    transition:
+      width 0.5s,
+      height 0.5s,
+      opacity 0.5s,
+      left 0.5s;
   }
 
-  :global(.marpit .active) {
-    content-visibility: visible;
+  :global(.marpit svg.active) {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.marpit svg.left) {
+    left: -40%;
+  }
+
+  :global(.marpit svg.right) {
+    left: 140%;
   }
 </style>
