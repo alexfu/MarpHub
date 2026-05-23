@@ -13,8 +13,8 @@
   onMount(() => {
     const slides = container.getElementsByTagName('svg');
     for (let i = 0; i < slides.length; i++) {
-      if (i != currentPage) {
-        slides[i].style.contentVisibility = 'hidden';
+      if (i == currentPage) {
+        slides[i].classList.toggle('active');
       }
     }
   });
@@ -23,9 +23,9 @@
     if (keybinds.next.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage < slides.length - 1) {
-        slides[currentPage].style.contentVisibility = 'hidden';
+        slides[currentPage].classList.toggle('active');
         currentPage += 1;
-        slides[currentPage].style.contentVisibility = 'visible';
+        slides[currentPage].classList.toggle('active');
         e.preventDefault();
       }
     }
@@ -33,9 +33,9 @@
     if (keybinds.previous.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage > 0) {
-        slides[currentPage].style.contentVisibility = 'hidden';
+        slides[currentPage].classList.toggle('active');
         currentPage -= 1;
-        slides[currentPage].style.contentVisibility = 'visible';
+        slides[currentPage].classList.toggle('active');
         e.preventDefault();
       }
     }
@@ -60,5 +60,26 @@
   .container {
     width: 100%;
     flex: 1;
+  }
+
+  :global(.marpit),
+  :global(.marpit svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.marpit) {
+    position: relative;
+    overflow: hidden;
+  }
+
+  :global(.marpit svg) {
+    position: absolute;
+    top: 0;
+    content-visibility: hidden;
+  }
+
+  :global(.marpit .active) {
+    content-visibility: visible;
   }
 </style>

@@ -46,22 +46,6 @@
 </div>
 
 <style>
-  :global(.marpit),
-  :global(.marpit svg) {
-    width: 100%;
-    height: 100%;
-  }
-
-  :global(.marpit) {
-    position: relative;
-    overflow: hidden;
-  }
-
-  :global(.marpit svg) {
-    position: absolute;
-    top: 0;
-  }
-
   #presentation-content {
     display: flex;
     flex-direction: column;
