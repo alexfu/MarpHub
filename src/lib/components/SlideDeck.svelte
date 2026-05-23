@@ -6,8 +6,8 @@
   let rendered = $derived.by(() => {
     return new Marp().render(presentation.content);
   });
-
   let currentPage = $state(0);
+  let movementKeys = { left: ['ArrowLeft', 'h'], right: ['ArrowRight', 'l'] };
   let container: HTMLDivElement;
 
   onMount(() => {
@@ -20,8 +20,7 @@
   });
 
   function onKeyDown(e: KeyboardEvent) {
-    console.log(e);
-    if (e.key == 'ArrowRight') {
+    if (movementKeys.right.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage < slides.length - 1) {
         slides[currentPage].style.contentVisibility = 'hidden';
@@ -31,7 +30,7 @@
       }
     }
 
-    if (e.key == 'ArrowLeft') {
+    if (movementKeys.left.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage > 0) {
         slides[currentPage].style.contentVisibility = 'hidden';
