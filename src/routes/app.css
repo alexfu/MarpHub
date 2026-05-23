@@ -29,7 +29,8 @@
   --gap-4: 16px;
   --gap-6: 24px;
   --gap-8: 32px;
-  --content-max: 1100px;
+  --content-max: 1280px;
+  --container-px: clamp(16px, 4vw, 32px);
 }
 
 *,
@@ -120,11 +121,11 @@ button {
 .container {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--gap-6) var(--gap-4);
+  padding: var(--gap-6) var(--container-px);
 }
 
 .container-sm {
   max-width: 460px;
   margin: 0 auto;
-  padding: var(--gap-6) var(--gap-4);
+  padding: var(--gap-6) var(--container-px);
 }
