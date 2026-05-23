@@ -2,10 +2,15 @@
   import PresentationCard from '$lib/components/PresentationCard.svelte';
 
   let { data } = $props();
+
+  const possessiveForm = (name: string) => {
+    // https://apastyle.apa.org/style-grammar-guidelines/grammar/possessive-nouns
+    return `${name}'s`;
+  };
 </script>
 
 <div class="container">
-  <h1 class="page-title">{data.user.name}s presentations</h1>
+  <h1 class="page-title">{possessiveForm(data.user.name)} presentations</h1>
   {#if data.presentations.length == 0}
     <div class="container-sm">
       <div id="empty-view">
