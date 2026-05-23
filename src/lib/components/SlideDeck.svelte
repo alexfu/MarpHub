@@ -12,8 +12,27 @@
   let currentPage = $state(0);
   let keybinds = { previous: ['ArrowLeft', 'h'], next: ['ArrowRight', 'l'], fullscreen: ['f'] };
   let container: HTMLDivElement;
+  let controls: HTMLDivElement;
 
   onMount(() => {
+    setupSlides();
+
+    window.addEventListener('mousemove', onActivity);
+    return () => {
+      window.removeEventListener('mousemove', onActivity);
+    };
+  });
+
+  let inactivityTimer: NodeJS.Timeout | undefined;
+  function onActivity() {
+    controls.classList.remove('hidden');
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+      controls.classList.add('hidden');
+    }, 2_000);
+  }
+
+  function setupSlides() {
     const slides = container.getElementsByTagName('svg');
     for (let i = 0; i < slides.length; i++) {
       if (i == currentPage) {
@@ -24,7 +43,8 @@
         slides[i].classList.toggle('right');
       }
     }
-  });
+    controls.classList.toggle('hidden');
+  }
 
   function onKeyDown(e: KeyboardEvent) {
     if (keybinds.next.includes(e.key)) {
@@ -100,7 +120,7 @@
 <div class="container" bind:this={container}>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html rendered.html}
-  <div class="controls">
+  <div class="controls" bind:this={controls}>
     <button onclick={prevSlide}><ChevronLeft /> </button>
     <button onclick={nextSlide}><ChevronRight /></button>
     <button onclick={enterFullscreen}><Expand /></button>
@@ -164,6 +184,15 @@
     transform: translate(-50%);
     padding: 4px;
     border-radius: 4px;
+    transition: opacity 0.3s;
+  }
+
+  :global(.controls.hidden) {
+    opacity: 0;
+  }
+
+  .controls:hover {
+    opacity: 1;
   }
 
   .controls button {
