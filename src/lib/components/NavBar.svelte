@@ -6,42 +6,41 @@
 </script>
 
 <nav>
-  <a class="brand" href="/">marpyard</a>
+  <div class="bar-inner">
+    <a class="brand" href="/">marpyard</a>
 
-  <div class="right">
-    {#if session}
-      <!-- Logged In -->
-      <a class="btn" href="/upload"><span class="icon"><ArrowUpTray /></span> Upload</a>
-      <button
-        type="button"
-        class="user-chip"
-        onclick={() => (menuOpen = !menuOpen)}
-        aria-haspopup="menu"
-        aria-expanded={menuOpen}
-      >
-        {session.user.name} ▾
-      </button>
-      {#if menuOpen}
-        <div class="menu" role="menu">
-          <form method="POST" action="/sign-out">
-            <button type="submit" class="menu-item">Sign out</button>
-          </form>
-        </div>
+    <div class="right">
+      {#if session}
+        <!-- Logged In -->
+        <a class="btn" href="/upload"><span class="icon"><ArrowUpTray /></span> Upload</a>
+        <button
+          type="button"
+          class="user-chip"
+          onclick={() => (menuOpen = !menuOpen)}
+          aria-haspopup="menu"
+          aria-expanded={menuOpen}
+        >
+          {session.user.name} ▾
+        </button>
+        {#if menuOpen}
+          <div class="menu" role="menu">
+            <form method="POST" action="/sign-out">
+              <button type="submit" class="menu-item">Sign out</button>
+            </form>
+          </div>
+        {/if}
+      {:else}
+        <!-- Logged Out -->
+        <a href="/sign-in">Sign in</a>
+        <a class="btn primary" href="/sign-up">Sign up</a>
       {/if}
-    {:else}
-      <!-- Logged Out -->
-      <a href="/sign-in">Sign in</a>
-      <a class="btn primary" href="/sign-up">Sign up</a>
-    {/if}
+    </div>
   </div>
 </nav>
 
 <style>
   nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
+    padding: 10px 0;
     background: var(--bg-muted);
     border-bottom: 1px solid var(--border);
   }

@@ -129,3 +129,13 @@ button {
   margin: 0 auto;
   padding: var(--gap-6) var(--container-px);
 }
+
+.bar-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--container-px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-3);
+}
