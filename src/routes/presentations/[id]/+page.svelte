@@ -28,46 +28,48 @@
 </dialog>
 
 <div class="meta-bar">
-  <div class="info">
-    <span class="title">{data.presentation.title}</span>
-    <span
-      ><a href={resolve(`/users/${data.presentation.user.id}`)}>{data.presentation.user.name}</a
-      ></span
-    >
-    <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
-  </div>
+  <div class="bar-inner">
+    <div class="info">
+      <span class="title">{data.presentation.title}</span>
+      <span
+        ><a href={resolve(`/users/${data.presentation.user.id}`)}>{data.presentation.user.name}</a
+        ></span
+      >
+      <span>{formatDistanceToNow(data.presentation.createdAt, { addSuffix: true })}</span>
+    </div>
 
-  {#if data.isOwner}
-    <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
-  {/if}
+    {#if data.isOwner}
+      <button class="btn danger" command="show-modal" commandfor="confirm-delete">Delete</button>
+    {/if}
+  </div>
 </div>
 
-<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-{@html rendered.html}
+<div class="container">
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html rendered.html}
+</div>
 
 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
 <svelte:head>{@html `<style>${rendered.css}</style>`}</svelte:head>
 
 <style>
   .meta-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     background: var(--bg-muted);
     border-bottom: 1px solid var(--border);
-    padding: 10px 16px;
+    padding: 10px 0;
     font-size: 14px;
-  }
-
-  .meta-bar .title {
-    color: var(--text);
-    font-weight: 600;
   }
 
   .meta-bar .info {
     display: flex;
     color: var(--text-muted);
     flex-grow: 1;
+    flex-wrap: wrap;
+  }
+
+  .meta-bar .title {
+    color: var(--text);
+    font-weight: 600;
   }
 
   .meta-bar .info > *:not(:last-child)::after {
