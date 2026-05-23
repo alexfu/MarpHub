@@ -78,4 +78,10 @@
     content: '⋅';
     padding: 0 5px;
   }
+
+  @media (max-width: 479px) {
+    .meta-bar :global(.bar-inner) {
+      flex-wrap: wrap;
+    }
+  }
 </style>
