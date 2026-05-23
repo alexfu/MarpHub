@@ -10,6 +10,23 @@
   <link rel="icon" href={favicon} />
 </svelte:head>
 
-<NavBar session={data.session} />
+<div id="main">
+  <NavBar session={data.session} />
+  <div id="content">
+    {@render children()}
+  </div>
+</div>
 
-{@render children()}
+<style>
+  #main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  #content {
+    flex: 1;
+    overflow: auto;
+  }
+</style>
