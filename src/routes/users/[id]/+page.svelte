@@ -25,7 +25,7 @@
   .grid {
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   }
 
   #empty-view {
