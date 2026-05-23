@@ -7,7 +7,7 @@
     return new Marp().render(presentation.content);
   });
   let currentPage = $state(0);
-  let movementKeys = { left: ['ArrowLeft', 'h'], right: ['ArrowRight', 'l'] };
+  let keybinds = { previous: ['ArrowLeft', 'h'], next: ['ArrowRight', 'l'], fullscreen: ['f'] };
   let container: HTMLDivElement;
 
   onMount(() => {
@@ -20,7 +20,7 @@
   });
 
   function onKeyDown(e: KeyboardEvent) {
-    if (movementKeys.right.includes(e.key)) {
+    if (keybinds.next.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage < slides.length - 1) {
         slides[currentPage].style.contentVisibility = 'hidden';
@@ -30,7 +30,7 @@
       }
     }
 
-    if (movementKeys.left.includes(e.key)) {
+    if (keybinds.previous.includes(e.key)) {
       const slides = container.getElementsByTagName('svg');
       if (currentPage > 0) {
         slides[currentPage].style.contentVisibility = 'hidden';
@@ -38,6 +38,10 @@
         slides[currentPage].style.contentVisibility = 'visible';
         e.preventDefault();
       }
+    }
+
+    if (keybinds.fullscreen.includes(e.key)) {
+      container.requestFullscreen();
     }
   }
 </script>
