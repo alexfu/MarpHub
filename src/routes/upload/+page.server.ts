@@ -59,6 +59,5 @@ const marpHead = (input: string) => {
     }
   }
 
-  console.log(lines);
   return lines.join('\n');
 };
