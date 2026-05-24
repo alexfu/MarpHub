@@ -16,7 +16,6 @@
 
   onMount(() => {
     setupSlides();
-
     window.addEventListener('mousemove', onActivity);
     return () => {
       window.removeEventListener('mousemove', onActivity);
@@ -26,9 +25,11 @@
   let inactivityTimer: NodeJS.Timeout | undefined;
   function onActivity() {
     controls.classList.remove('hidden');
+    document.documentElement.style.cursor = '';
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
       controls.classList.add('hidden');
+      document.documentElement.style.cursor = 'none';
     }, 2_000);
   }
 
