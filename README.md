@@ -1,4 +1,4 @@
-# Marpyard
+# MarpHub
 
 A place to host and share your [Marp](https://marp.app) slides.
 
@@ -24,14 +24,14 @@ pnpm install
 docker compose up -d
 ```
 
-This runs Postgres 18 on `localhost:5432` with user `marpyard`, password `123`, and database `marpyard`.
+This runs Postgres 18 on `localhost:5432` with user `marphub`, password `123`, and database `marphub`.
 
 ### 3. Configure environment
 
 A `.env` file at the project root is used for `DATABASE_URL`. It should already be present with:
 
 ```
-DATABASE_URL="postgres://marpyard:123@localhost:5432/marpyard"
+DATABASE_URL="postgres://marphub:123@localhost:5432/marphub"
 ```
 
 `prisma.config.ts` loads this via `dotenv/config`, so the Prisma CLI picks it up automatically.

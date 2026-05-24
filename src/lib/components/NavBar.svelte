@@ -7,7 +7,7 @@
 
 <nav>
   <div class="bar-inner">
-    <a class="brand" href="/">marpyard</a>
+    <a class="brand" href="/">MarpHub</a>
 
     <div class="right">
       {#if session}
